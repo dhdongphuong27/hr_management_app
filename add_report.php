@@ -3,7 +3,7 @@
     if (!isset($_SESSION["user"])){
         header("location:login.php");
     }
-    include 'head_only.php';
+    include 'employee_only.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,12 +32,37 @@
     <div class="">
         <!-- The sidebar -->
         <?php
-          include 'head_sidebar.php';
+          include 'employee_sidebar.php';
         ?>
-
+        <?php
+          $strlink = $_SERVER['PHP_SELF'];
+          $uncutstr = strstr($strlink, 'add_report.php/', FALSE);
+          $cutstr = str_replace("add_report.php/","",$uncutstr);
+        ?>
         <!-- Page content -->
         <div class="content">
-            How to use director's function
+            <div class="row">
+                <div class="col-9">
+                    <div class="form_container">
+                        <form action="/webfinal/add_report_submit.php" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="task_id" id="task_id" value="<?php echo $cutstr ?>">
+                            <div class="form-group">
+                                <label for="report_description"><b>Report Description</b></label>
+                                <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' name="report_description"
+                            id="report_description" class="form-control" rows="2" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="attachment"><b>Attachment</b></label>
+                                <input type="file" class="form-control" name="attachment" id="attachment" accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.xlsx,.pptx,.ppt,.csv">
+                            </div>
+                            <hr>
+                            <button type="submit" name="add_report" id="add_btn" class="btn custombtn">Submit report</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
         </div>
     </div>
     

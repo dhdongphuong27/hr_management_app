@@ -8,14 +8,19 @@ function toggleEdit(e) {
     }
     document.querySelector("#head_id").disabled = false;
 }
-function saveDepartmentInfo(){
-    console.log(document.querySelector("#head_id").value)
-    var formData = new FormData();
-    formData.append("department_name", document.querySelector("#department_name").innerHTML)
-    formData.append("room_id", document.querySelector("#room_id").innerHTML)
-    formData.append("department_description", document.querySelector("#department_description").innerHTML)
-    formData.append("head_id", document.querySelector("#head_id").value)
-    var request = new XMLHttpRequest();
-    request.open("POST", "/webfinal/edit_department_submit.php");
-    request.send(formData);
+function responseDetails(report_id){
+    var response = document.getElementById(report_id);
+    $(response).toggle('slow');
+}
+function waitingTaskOnly(){
+    $(".table_row").not(".Waiting").toggle('fast');
+}
+function toggleEditE(e){
+    e.preventDefault();
+    document.querySelector(".editEBtn").style.display = 'none';
+    document.querySelector(".saveEBtn").style.display = 'block';
+    textareas = document.getElementsByTagName("textarea");
+    for (var i = 0; i < textareas.length; i++) {
+        textareas[i].readOnly = false;
+    }
 }

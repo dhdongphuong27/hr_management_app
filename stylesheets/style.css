@@ -22,6 +22,10 @@
   background: white;
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+  background-color: #f8f9fa;
+}
+body{
+  background-color: #f8f9fa;
 }
 .center h1{
   text-align: center;
@@ -105,32 +109,39 @@ form .txt_field{
   margin: 0;
   padding: 0;
   width: 280px;
-  background-color: #f1f1f1;
+  background-color: #555;
   position: fixed;
   height: 100%;
   overflow: auto;
-  padding-top:180px;
+}
+.sidebar_header{
+  margin-top: 60px;
+  margin-bottom: 10px;
 }
 
 /* Sidebar links */
 .sidebar a {
+  
   display: block;
-  color: black;
+  color: white;
   padding: 16px;
   text-decoration: none;
+  border: 1px solid white;
 }
 
 /* Active/current link */
 .sidebar a.active {
-  background-color: #04AA6D;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+  background-color: #f1f1f1;
+  color: black;
 }
+
+
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
@@ -175,6 +186,10 @@ div.content {
     position: relative;
     top: 50%;
 }
+.task_response{
+    position: relative;
+    top: 20%;
+}
 .saveBtn{
   position: fixed;
   margin-left: 67%;
@@ -187,4 +202,16 @@ div.content {
 .deleteBtn{
   position: fixed;
   margin-left: 72.5%;
+}
+.report_btn{
+  float: right;
+
+}
+.avatar-primary{
+    width: 100px;
+    object-fit: cover;
+}
+#text-center{
+    text-align: center;
+    color: white;
 }

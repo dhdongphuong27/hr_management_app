@@ -3,11 +3,7 @@
     if (!isset($_SESSION["user"])){
         header("location:login.php");
     }
-    if ($_SESSION["position"]=="head"){
-        header("location:head_index.php");
-    }else if($_SESSION["position"]=="employee"){
-        header("location:employee_index.php");
-    }
+    include 'director_only.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,12 +42,9 @@
     ?>
     <div class="">
         <!-- The sidebar -->
-        <div class="sidebar">
-            <a href="/webfinal/director_index.php">How to use</a>
-            <a href="/webfinal/account_management.php">Account management</a>
-            <a class="active" href="/webfinal/department_management.php">Department management</a> 
-            <a href="logout.php">Logout</a>
-        </div>
+        <?php
+          include 'director_sidebar.php';
+        ?>
 
         <!-- Page content -->
         <div class="content">

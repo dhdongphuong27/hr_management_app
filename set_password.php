@@ -1,10 +1,3 @@
-<?php
-    session_start();
-    if (!isset($_SESSION["user"])){
-        header("location:login.php");
-    }
-    include 'head_only.php';
-?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,16 +22,21 @@
     <link rel='stylesheet' href='/webfinal/stylesheets/style.css' />
   </head>
   <body>
-    <div class="">
-        <!-- The sidebar -->
-        <?php
-          include 'head_sidebar.php';
-        ?>
+    <div class="container-fluid gedf-wrapper custom_container">
+      <div class="center">
+      <h1>New password</h1>
+          <form action="set_password_submit.php" method="post" >
+              <div class="txt_field">
+                  <input type="password" name="password" required>
+                  <span></span>
+                  <label>Password</label>
+              </div>
+                  <button type="submit" name="save" id="loginbtn" class="btn btn-primary btn-block">Save</button>
+              <div class="signup_link">
+              </div>
+          </form>
+      </div>
 
-        <!-- Page content -->
-        <div class="content">
-            How to use director's function
-        </div>
     </div>
     
     <script src="/webfinal/javascripts/main.js"></script>

@@ -12,13 +12,15 @@
             $row = mysqli_fetch_array($user, MYSQLI_BOTH);
             $position = $row["position"];
             $_SESSION["position"] = $position;
-            if ($position=="employee"){
-                header("location: employee_index.php");
-            }else if ($position=="head"){
-                header("location: head_index.php");
-            }else if ($position=="director"){
-                header("location: director_index.php");
-            }
+            $_SESSION["department_id"] = $row["department_id"];
+            $_SESSION["userid"] = $row["userid"];
+            $_SESSION["password"] = $row["password"];
+            $_SESSION["profilepic"] = $row["profilepic"];
+            $_SESSION["fullname"] = $row["fullname"];
+
+            include 'redirect.php';
+            
+            
         }else{
             header("location: login.php");
             //inform user that login failed

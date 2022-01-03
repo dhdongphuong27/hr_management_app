@@ -3,11 +3,7 @@
     if (!isset($_SESSION["user"])){
         header("location:login.php");
     }
-    if ($_SESSION["position"]=="head"){
-        header("location:head_index.php");
-    }else if($_SESSION["position"]=="employee"){
-        header("location:employee_index.php");
-    }
+    include 'director_only.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,16 +31,13 @@
   <body>
     <div class="">
         <!-- The sidebar -->
-        <div class="sidebar">
-            <a href="director_index.php">How to use</a>
-            <a href="account_management.php">Account management</a>
-            <a class="active" href="department_management.php">Department management</a> 
-            <a href="logout.php">Logout</a>
-        </div>
+        <?php
+          include 'director_sidebar.php';
+        ?>
 
         <!-- Page content -->
         <div class="content">
-            <a type="button" href="add_department.php" class="btn add_department custombtn addbtn">Add department</a>
+            <a type="button" href="/webfinal/add_department.php" class="btn add_department custombtn addbtn">Add department</a>
             <table class="table table-hover table-striped table-bordered">
                 <thead class="thead">
                     <tr>
@@ -75,14 +68,14 @@
                         <td>
                           <?php
                             //get header name
-                            $header_id = $row['head_id'];
-                            $users = $conn->query("SELECT * FROM users where userid='$header_id'");
-                            $header_name = "";
+                            $head_id = $row['head_id'];
+                            $users = $conn->query("SELECT * FROM users where userid='$head_id'");
+                            $head_name = "";
                             if ($users->num_rows > 0) {
                               $row1 = $users->fetch_assoc();
-                              $header_name = $row1['fullname'];
+                              $head_name = $row1['fullname'];
                             }
-                            echo $header_name;
+                            echo $head_name;
                           ?>
                         </td>
                     </tr>

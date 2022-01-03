@@ -3,11 +3,7 @@
     if (!isset($_SESSION["user"])){
         header("location:login.php");
     }
-    if ($_SESSION["position"]=="head"){
-        header("location:header_index.php");
-    }else if($_SESSION["position"]=="employee"){
-        header("location:employee_index.php");
-    }
+    include 'director_only.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,31 +31,29 @@
   <body>
     <div class="">
         <!-- The sidebar -->
-        <div class="sidebar">
-            <a href="director_index.php">How to use</a>
-            <a class="active" href="account_management.php">Account management</a>
-            <a href="department_management.php">Department management</a> 
-            <a href="logout.php">Logout</a>
-        </div>
+        <?php
+          include 'director_sidebar.php';
+        ?>
 
         <!-- Page content -->
         <div class="content">
-            <a type="button" href="add_employee.php" class="btn add_employee custombtn addbtn">Add Employee</a>
+            <a type="button" href="/webfinal/add_employee.php" class="btn add_employee custombtn addbtn">Add Employee</a>
             <table class="table table-hover table-striped table-bordered">
                 <thead class="thead">
                     <tr>
                         <th scope="col">ID</th>
                         <th class="col-3" scope="col">Full Name</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Password</th>
                         <th scope="col">Position</th>
                         <th scope="col">Department</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th class="col-1" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                   <?php
                     require_once("conn.php");
-                    $sql = "SELECT * FROM users ORDER BY fullname";
+                    $sql = "SELECT * FROM users WHERE username != 'director' ORDER BY userid";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                       while ($row = $result->fetch_assoc()) {
@@ -73,12 +67,22 @@
                         }
                   ?>
                     <tr>
+                        <div>
                         <th scope="row"><?php echo $row["userid"]?></th>
-                        <td><?php echo $row["fullname"]?></td>
-                        <td><?php echo $row["username"]?></td>
-                        <td><?php echo $row["password"]?></td>
+                        <td><a href="/webfinal/employee_details.php/<?php echo $row["userid"];?>"><?php echo $row["fullname"]?></td>
                         <td><?php echo $row["position"]?></td>
                         <td><a><?php echo $department_name; ?></a></td>
+                        <td><?php echo $row["username"]?></td>
+                        <td><?php echo $row["password"]?></td>
+                        </div>
+                        <td>
+                          <form method="post" action="/webfinal/reset_password.php"> 
+                            <input type="hidden" name="username" value="<?php echo $row["username"]?>">
+                            <button type="submit" name="reset_password" class="btn btn-primary">Reset password</button>
+                          </form>
+                          
+                      
+                        </td>
                     </tr>
                   <?php
                       }

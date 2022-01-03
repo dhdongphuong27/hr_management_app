@@ -3,11 +3,7 @@
     if (!isset($_SESSION["user"])){
         header("location:login.php");
     }
-    if ($_SESSION["position"]=="head"){
-        header("location:header_index.php");
-    }else if($_SESSION["position"]=="employee"){
-        header("location:employee_index.php");
-    }
+    include 'director_only.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,16 +31,39 @@
   <body>
     <div class="">
         <!-- The sidebar -->
-        <div class="sidebar">
-            <a class="active" href="director_index.php">How to use</a>
-            <a href="account_management.php">Account management</a>
-            <a href="department_management.php">Department management</a> 
-            <a href="logout.php">Logout</a>
-        </div>
+        <?php
+          include 'director_sidebar.php';
+        ?>
 
         <!-- Page content -->
         <div class="content">
-            How to use director's function
+            <h2 class="text-center" style = "margin-top: 40px">
+              How to use director's function
+            </h2>
+            <p style="margin-top:40px; font-size: 25px">
+              This is director's main page: 
+            </p>
+            <p style="font-size: 23px">
+              &emsp;- Employee account management functions include: <br>
+              <span style="font-size: 18px">
+                &emsp;&emsp;+ View a list of employees of the whole company: only show a summary of some necessary information.<br>
+                &emsp;&emsp;+ When selecting a specific employee: see all details of that employee.<br>
+                &emsp;&emsp;+ Reset the password for an employee back to the default value.<br>
+                &emsp;&emsp;+ Add a new employee: the administrator will enter the full name, username, select the department that the employee belongs to. Each employee belongs to only one department and this information will never change.<br>
+              </span>
+              &emsp;- Departmental management functions include: <br>
+              <span style="font-size: 18px">
+                &emsp;&emsp;+ Add a new department: need to enter information such as department name, description and room number of the department.<br>
+                &emsp;&emsp;+ Edit information of existing departments.<br>
+                &emsp;&emsp;+ Appoint an employee to be the head of the department.<br>
+              </span>
+              &emsp;- Leave management functions include: <br>
+              <span style="font-size: 18px">
+                &emsp;&emsp;+ The leave request approver's interface will display a list of leave requests by time, the latest one coming first.<br>
+                &emsp;&emsp;+ When clicking on each specific request, the approver will see detailed information (detailed description, attached file) and have the function to make one of two options: approve or not approve. <br>
+              </span>
+
+            </p>
         </div>
     </div>
     
