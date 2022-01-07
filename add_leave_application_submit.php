@@ -5,16 +5,17 @@
         header("location:login.php");
     }
 
-    if ($_SESSION["position"]=="head"){
-        if (isset($_POST["add_task"]) && $_POST["task_name"]!='' && $_POST["task_description"]!='' && $_POST["assignee_id"]!=''){
+    if ($_SESSION["position"]!="director"){
+        if (isset($_POST["add_leave_application"]) && $_POST["reason"]!='' && $_POST["numberofdays"]!=''){
             
-            $task_name = $_POST["task_name"];
-            $task_description = $_POST["task_description"];
-            $assignee_id = $_POST["assignee_id"];
+            $reason = $_POST["reason"];
+            $numberofdays = $_POST["numberofdays"];
             $file_name = "";
-            $department_id = $_SESSION['department_id'];
-            $current_date = date('Y-m-d H:i:s');
-            $deadline = $_POST["deadline"];
+            $start_on = $_POST["start_date"];
+            $userid = $_SESSION["userid"];
+            $department_id = $_SESSION["department_id"];
+            $position = $_SESSION["position"];
+            $post_on = date("Y-m-d");
             if ($_FILES['attachment']['error'] === UPLOAD_ERR_OK)
             {
                 $target_dir = "./uploads/";
@@ -26,16 +27,16 @@
                     move_uploaded_file($_FILES["attachment"]["tmp_name"], $target_file);
                 }
             }
-            $sql = "INSERT INTO tasks(task_name,task_description,department_id,assignee_id,attachment,assigned_at,deadline)
-                        VALUES ('$task_name', '$task_description', '$department_id', '$assignee_id', '$file_name', '$current_date','$deadline')";
+            $sql = "INSERT INTO leave_applications(userid,department_id,position,numberofdays,reason,attachment,start_on,post_on)
+                        VALUES ($userid, $department_id, '$position', $numberofdays, '$reason', '$file_name', '$start_on', '$post_on')";
             mysqli_query($conn, $sql);
             
         }else{
-            header("location: add_task.php");
+            header("location: index.php");
         }
     }else{
         header("location:login.php");
     }
-    header("location: head_index.php");
+    header("location: worker_leave_management.php");
 
 ?>

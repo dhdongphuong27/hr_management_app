@@ -37,11 +37,59 @@
 
         <!-- Page content -->
         <div class="content">
-            This page will show user's information
+          <button onclick=unfinishedTaskOnly() class="btn float-right btn-secondary waitFilter" style="margin: 20px 20px 20px 20px">Unfinished task only</button>
+            <table class="table table-hover table-striped table-bordered">
+                <thead class="thead">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Task Name</th>
+                        <th class="col-2" scope="col">Description</th>
+                        <th scope="col">Attachment</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Work Progress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    require_once("conn.php");
+                    $userid = $_SESSION['userid'];
+                    $sql = "SELECT * FROM tasks WHERE assignee_id = $userid ORDER BY task_id DESC";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                      while ($row = $result->fetch_assoc()) {
+                        $status = "";
+                        if ($row["work_progress"]=="New"){
+                            $status = "primary";
+                        }else if ($row["work_progress"]=="Completed"){
+                            $status = "success";
+                        }else if ($row["work_progress"]=="Canceled"){
+                            $status = "warning";
+                        }else if ($row["work_progress"]=="In progress"){
+                            $status = "info";
+                        }else if ($row["work_progress"]=="Waiting"){
+                            $status = "secondary";
+                        }else if ($row["work_progress"]=="Rejected"){
+                            $status = "danger";
+                        }
+                  ?>
+                    <tr style="transform: rotate(0);" class="table_row table-<?php echo $status; ?>">
+                        <th scope="row"><?php echo $row["task_id"]?></th>
+                        <td><a class="stretched-link" href="/webfinal/task_details.php/<?php echo $row["task_id"]?>"><?php echo $row["task_name"]?></a></td>
+                        <td><a class="stretched-link" href="/webfinal/task_details.php/<?php echo $row["task_id"]?>">Click to see details</a></td>
+                        <td><a href="/webfinal/uploads/<?php echo $row['attachment']?>" download><?php echo $row["attachment"]?></a></td>
+                        <td><?php echo date("h:i, d/m/Y", strtotime($row["deadline"]))?></td>
+                        <td><?php echo $row["work_progress"] ?></td>
+                    </tr>
+                  <?php
+                      }
+                    }
+                  ?>
+                </tbody>
+            </table>
         </div>
     </div>
     
-    <script src="/webfinal/javascripts/main.js"></script>
+    <script type="text/javascript" src="javascripts/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>

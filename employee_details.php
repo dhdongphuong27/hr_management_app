@@ -62,10 +62,16 @@
                   <label for="fullname" class="col-md-4 col-form-label">Full name:</label>
                   <p name="fullname" id="fullname" class="form-control"><?php echo $row["fullname"]; ?></p>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <label for="password" class="col-md-4 col-form-label">Password:</label>
                       <p name="password" id="password" class="form-control" ><?php echo $row["password"]; ?></p>
+                      <form method="post" onsubmit="return confirm('Do you want to reset this account password to default?');" action="/webfinal/reset_password.php"> 
+                        <input type="hidden" name="username" value="<?php echo $row["username"]?>">
+                        <input type="hidden" name="userid" value="<?php echo $row["userid"]?>">
+                        <button type="submit" name="reset_password" class="btn btn-primary">Reset password</button>
+                      </form>
                     </div>
+                    
                   </div>
                   <div class="row">
                     <div class="col-md-6">

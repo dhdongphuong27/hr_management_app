@@ -3,8 +3,9 @@
     include 'conn.php';
     if (isset($_POST["reset_password"])){
         $username = $_POST["username"];
-        $conn->query("UPDATE users SET password = '$username' WHERE username='$username'");
+        $hashed_password = password_hash($username, PASSWORD_DEFAULT);
+        $conn->query("UPDATE users SET password = '$hashed_password' WHERE username='$username'");
     }
-    header("Location:/webfinal/account_management.php")
+    header("Location:/webfinal/employee_details.php/".$_POST["userid"])
 
 ?>

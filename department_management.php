@@ -37,7 +37,7 @@
 
         <!-- Page content -->
         <div class="content">
-            <a type="button" href="/webfinal/add_department.php" class="btn add_department custombtn addbtn">Add department</a>
+            <a  style="margin: 20px 20px 20px 20px" type="button" href="/webfinal/add_department.php" class="btn add_department custombtn addbtn">Add department</a>
             <table class="table table-hover table-striped table-bordered">
                 <thead class="thead">
                     <tr>

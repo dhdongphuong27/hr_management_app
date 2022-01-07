@@ -186,10 +186,7 @@ div.content {
     position: relative;
     top: 50%;
 }
-.task_response{
-    position: relative;
-    top: 20%;
-}
+
 .saveBtn{
   position: fixed;
   margin-left: 67%;

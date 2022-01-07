@@ -1,6 +1,8 @@
 <?php
     $position = $_SESSION['position'];
-    if ($_SESSION["password"]==$_SESSION["user"]){
+    if (!isset($_SESSION["user"])){
+        header("location:login.php");
+    }else if (password_verify($_SESSION["user"], $_SESSION["password"])){
         header("Location:/webfinal/set_password.php");
     }else if ($position=="employee"){
         header("location: employee_index.php");

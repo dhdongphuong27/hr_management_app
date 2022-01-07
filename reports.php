@@ -32,9 +32,11 @@
         <!-- The sidebar -->
         <?php
             if ($_SESSION["position"]==="head"){
-                include 'head_sidebar.php';
+              include 'head_sidebar.php';
             }else if ($_SESSION["position"]==="employee"){
-                include 'employee_sidebar.php';
+              include 'employee_sidebar.php';
+            }else{
+              header("location:director_index.php");
             }
         ?>
         <?php
@@ -43,7 +45,7 @@
           $cutstr = str_replace("reports.php/","",$uncutstr);
 
           require_once("conn.php");
-          $reports = $conn->query("SELECT * FROM reports WHERE task_id = $cutstr ORDER BY report_id DESC");
+          $reports = $conn->query("SELECT * FROM reports WHERE task_id = $cutstr");
           $tasks = $conn->query("SELECT * FROM tasks WHERE task_id = $cutstr");
           $task_name = "";
           if ($tasks->num_rows > 0) {
@@ -57,11 +59,11 @@
           <?php
             if ($_SESSION["position"]=="employee" && ($row1['work_progress']=="Rejected" || $row1['work_progress']=="In progress")){
             ?>
-              <a type="button" href="/webfinal/add_report.php/<?php echo $cutstr?>" class="btn add_task custombtn addbtn">Report</a>
+              <a type="button" href="/webfinal/add_report.php/<?php echo $cutstr?>" class="btn add_task custombtn addbtn" style="margin: 20px 20px 20px 0px; float: right">Report</a>
           <?php
             }
           ?>
-
+          <div class="table-container" style="margin-top:40px">
             <table class="table table-hover table-bordered">
                 <thead class="thead">
                     <tr>
@@ -71,6 +73,7 @@
                         <th scope="col">Attachment</th>
                         <th scope="col">Submitted at</th>
                         <th scope="col">Response</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,6 +102,7 @@
                         <td><a href="/webfinal/uploads/<?php echo $row['attachment']?>" download><?php echo $row["attachment"]?></a></td>
                         <td><?php echo $row["submit_date"]?></td>    
                         <td><button title="Click to see response" onclick=responseDetails(<?php echo $row['report_id']?>) class="btn btn-<?php echo $color ?>"><?php echo $row["report_status"]?></button></td>
+                        <td><?php echo $row["completion_status"]?></td>
                     </tr>
                   <?php
                     $report_id = $row["report_id"];
@@ -107,12 +111,22 @@
                       $row2 = $responses->fetch_assoc(); 
                     
                     ?>
-                    <tr class="table-danger" id="<?php echo $row["report_id"]?>" style="display: none">
-                        <td colspan="2">Comment:</td>
+                    <tr class="table-danger" id="<?php echo $row["report_id"]?>">
+                        <td colspan="1">Comment:</td>
                         <td colspan="2"><?php echo $row2["comment"] ?></td>
+                        <td colspan="1">
+                          <?php
+                            if ($row2['attachment']!="" && $row2['attachment']!= NULL){
+                          ?>
+                            <a class="form-control input-group-lg" href="/webfinal/uploads/<?php echo $row2['attachment']?>" download><?php echo $row2["attachment"]?></a>
+                          <?php
+                            }
+                          ?>
+                        </td>
                         <td>Deadline extended to:</td>
                         <td><?php echo date("d/m/Y", strtotime($row2["deadline"]))?></td>
                     </tr>
+          
                   <?php
                     }
                       }
@@ -120,6 +134,8 @@
                   ?>
                 </tbody>
             </table>
+          </div>
+            
         </div>
     </div>
     

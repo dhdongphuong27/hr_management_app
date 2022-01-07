@@ -1,9 +1,8 @@
 <?php
     session_start();
     if (!isset($_SESSION["user"])){
-        header("location:login.php");
+      header("location:login.php");
     }
-    include 'head_only.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,51 +31,66 @@
     <div class="">
         <!-- The sidebar -->
         <?php
-          include 'head_sidebar.php';
+          if ($_SESSION["position"]==="head"){
+            include 'head_sidebar.php';
+          }else if ($_SESSION["position"]==="director"){
+            include 'director_sidebar.php';
+          }else{
+            header("location:director_index.php");
+          }
         ?>
-
+        <?php
+          require_once("conn.php");
+        ?>
         <!-- Page content -->
         <div class="content pt-3">
-            <a type="button" href="/webfinal/add_task.php" class="btn add_task custombtn addbtn">Add Task</a>
-            <button onclick=waitingTaskOnly() class="btn add_task btn-secondary addbtn" style="margin-right: 20px">Waiting task only</button>
+            <button onclick=thisYearOnly() class="btn float-right btn-secondary waitFilter" style="margin: 0 20px 20px 20px">This year</button>
+            
             <div class="table-container" style="margin-top:20px">
               <table class="table table-hover table-striped table-bordered">
                   <thead class="thead">
                       <tr>
                           <th class="col-1" scope="col">ID</th>
-                          <th scope="col">Task Name</th>
-                          <th class="col-2" scope="col">Description</th>
-                          <th class="col-3" scope="col">Assignee</th>
-                          <th scope="col">Attachment</th>
-                          <th scope="col">Deadline</th>
-                          <th scope="col">Work Progress</th>
+                          <th class="col-2" scope="col">Employee</th>
+                          <th class="col-4" scope="col">Reason</th>
+                          <th class="col-2" scope="col">Start day</th>
+                          <th class="col-2" scope="col">Number of Day</th>
+                          <th class="col-1" scope="col">Status</th>
                       </tr>
                   </thead>
                   <tbody>
                     <?php
-                      require_once("conn.php");
-                      $department_id = $_SESSION['department_id'];
-                      $sql = "SELECT * FROM tasks WHERE department_id = $department_id";
-                      $result = $conn->query($sql);
+                        if ($_SESSION['position']=="head"){
+                            $department_id = $_SESSION['department_id'];
+                            $userid = $_SESSION['userid'];
+                            $result = $conn->query("SELECT * FROM leave_applications WHERE department_id = $department_id AND userid != $userid ORDER BY la_id DESC");
+                        }else if ($_SESSION['position']=="director"){
+                            $result = $conn->query("SELECT * FROM leave_applications WHERE position = 'head' ORDER BY la_id DESC");
+                        }
+                      
                       if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                          //get assignee name
-                          $assignee_id = $row['assignee_id'];
-                          $users = $conn->query("SELECT * FROM users where userid='$assignee_id'");
-                          $assignee_name = "";
-                          if ($users->num_rows > 0) {
-                            $row1 = $users->fetch_assoc();
-                            $assignee_name = $row1['fullname'];
+                          if ($row["status"]=='approved'){
+                            $status = 'success';
+                          }else if ($row["status"]=='waiting'){
+                            $status = 'primary';
+                          }else if ($row["status"]=='refused'){
+                            $status = 'danger';
                           }
+                          //get employee name
+                          $userid = $row["userid"];
+                          $result1 = $conn->query("SELECT * FROM users WHERE userid = $userid");
+                          $row1 = $result1->fetch_assoc();
+                          $employee_name = $row1["fullname"];
+                          $la_id = $row["la_id"];
                     ?>
-                      <tr class="<?php echo $row["work_progress"] ?> table_row" style="transform: rotate(0);">
-                          <th scope="row"><?php echo $row["task_id"]?></th>
-                          <td><?php echo $row["task_name"]?></td>
-                          <td><a class="stretched-link" href="/webfinal/task_details.php/<?php echo $row["task_id"]?>">Click to see details</a></td>
-                          <td><?php echo $assignee_name?></td>
-                          <td><a href="/webfinal/uploads/<?php echo $row['attachment']?>" download><?php echo $row["attachment"]?></a></td>
-                          <td><?php echo date("h:m, d/m/Y", strtotime($row["deadline"]))?></td>
-                          <td><?php echo $row["work_progress"] ?></td>
+                      <tr class="table-<?php echo $status; ?> table_row <?php echo date("Y", strtotime($row["start_on"]))?>" style="transform: rotate(0);">
+                          <th scope="row"><?php echo $row["la_id"]?></th>
+                          <td><a class="stretched-link" href="/webfinal/leave_application_details.php/<?php echo $la_id?>"></a><?php echo $employee_name; ?></td>
+                          <td><?php echo $row["reason"]?></td>
+                          <td><?php echo date("d/m/Y", strtotime($row["start_on"]))?></td>
+                          <td><?php echo $row["numberofdays"]?></td>
+                          <td><?php echo $row["status"]?></td>
                       </tr>
                     <?php
                         }

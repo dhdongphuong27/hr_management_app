@@ -10,9 +10,11 @@
     $row = mysqli_fetch_array($report, MYSQLI_BOTH);
 
     $completion_level = $_POST["btnradio"];
+    $completion_status = $_POST["completion_status"];
     $task_id =  $row["task_id"];
 
-    $sql = "UPDATE reports SET report_status = '$completion_level' WHERE report_id = $cutstr";
+    echo $completion_status;
+    $sql = "UPDATE reports SET report_status = '$completion_level', completion_status = '$completion_status' WHERE report_id = $cutstr";
     $conn->query($sql);
 
     $sql1 = "UPDATE tasks 
@@ -22,7 +24,7 @@
     $conn->query($sql1);
 
 
-    $location = "location:/webfinal/head_task_management.php/";
+    $location = "location:/webfinal/head_index.php";
 	
     header($location);
 ?>

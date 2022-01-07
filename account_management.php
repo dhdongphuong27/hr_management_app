@@ -37,52 +37,33 @@
 
         <!-- Page content -->
         <div class="content">
-            <a type="button" href="/webfinal/add_employee.php" class="btn add_employee custombtn addbtn">Add Employee</a>
+            <a style="margin: 20px 20px 20px 20px" type="button" href="/webfinal/add_employee.php" class="btn add_employee custombtn addbtn">Add Employee</a>
             <table class="table table-hover table-striped table-bordered">
                 <thead class="thead">
                     <tr>
                         <th scope="col">ID</th>
                         <th class="col-3" scope="col">Full Name</th>
-                        <th scope="col">Position</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Password</th>
-                        <th class="col-1" scope="col"></th>
+                        <th class="col-1" scope="col">Position</th>
+                        <th class="col-1" scope="col">Username</th>
+                        <th class="col-2" scope="col">Password (hashed)</th>
                     </tr>
                 </thead>
                 <tbody>
                   <?php
                     require_once("conn.php");
-                    $sql = "SELECT * FROM users WHERE username != 'director' ORDER BY userid";
+                    $sql = "SELECT * FROM users WHERE position != 'director ' ORDER BY userid";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                       while ($row = $result->fetch_assoc()) {
-                        //get department name
-                        $department_id = $row['department_id'];
-                        $departments = $conn->query("SELECT * FROM departments where department_id='$department_id'");
-                        $department_name = "";
-                        if ($departments->num_rows > 0) {
-                          $row1 = $departments->fetch_assoc();
-                          $department_name = $row1['department_name'];
-                        }
                   ?>
-                    <tr>
+                    <tr style="transform: rotate(0);">
                         <div>
                         <th scope="row"><?php echo $row["userid"]?></th>
-                        <td><a href="/webfinal/employee_details.php/<?php echo $row["userid"];?>"><?php echo $row["fullname"]?></td>
+                        <td><a class="stretched-link" href="/webfinal/employee_details.php/<?php echo $row["userid"];?>"><?php echo $row["fullname"]?></td>
                         <td><?php echo $row["position"]?></td>
-                        <td><a><?php echo $department_name; ?></a></td>
                         <td><?php echo $row["username"]?></td>
                         <td><?php echo $row["password"]?></td>
                         </div>
-                        <td>
-                          <form method="post" action="/webfinal/reset_password.php"> 
-                            <input type="hidden" name="username" value="<?php echo $row["username"]?>">
-                            <button type="submit" name="reset_password" class="btn btn-primary">Reset password</button>
-                          </form>
-                          
-                      
-                        </td>
                     </tr>
                   <?php
                       }

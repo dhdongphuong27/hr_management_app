@@ -78,7 +78,7 @@
                                 <input type="datetime-local" id="deadline" name="deadline">
                             </div>
                             <hr>
-                            <button type="add_task" name="add_task" id="add_btn" class="btn custombtn">Add</button>
+                            <button type="submit" name="add_task" id="add_btn" class="btn custombtn">Add</button>
                         </form>
                     </div>
                     

@@ -48,6 +48,8 @@
                 include 'head_sidebar.php';
             }else if ($_SESSION["position"]==="employee"){
                 include 'employee_sidebar.php';
+            }else{
+                header("location:director_index.php");
             }
         ?>
 
@@ -91,18 +93,41 @@
                     <center><h2>Approve</h2></center>
                     <div style="position: relative; top:30%">
                         <form action="/webfinal/approve_task_submit.php/<?php echo $report_id?>" method="post">
+                            
+                            <?php
+                                $date = new DateTime($row1["deadline"]);
+                                $match_date = new DateTime($row["submit_date"]);
+                                $interval = $date->diff($match_date);
+                                if($interval->days == 0) {
+                                    $completion_status = "on time";
+                                } elseif($interval->days != 0) {
+                                    if($interval->invert == 0) {
+                                        $completion_status = "late";
+                                    } else {
+                                        $completion_status = "on time";
+                                    }
+                                } else {
+                                    //Sometime
+                                }
+                            ?>
                             <div class="btn-group"  style="width:100%" role="group" aria-label="Basic radio toggle button group">
                                 <input type="radio" class="btn-check" name="btnradio" value="Bad" id="btnradio3" autocomplete="off">
                                 <label class="btn btn-outline-warning" for="btnradio3">Bad</label>
 
-                                <input type="radio" class="btn-check" name="btnradio" value="OK" id="btnradio2" autocomplete="off">
+                                <input type="radio" class="btn-check" name="btnradio" value="OK" id="btnradio2" autocomplete="off" checked>
                                 <label class="btn btn-outline-primary" for="btnradio2">OK</label>
-
-                                <input type="radio" class="btn-check" name="btnradio" value="Good" id="btnradio1" autocomplete="off" checked>
-                                <label class="btn btn-outline-success" for="btnradio1">Good</label>
+                                <?php
+                                    if ($completion_status=="on time"){
+                                ?>
+                                    <input type="radio" class="btn-check" name="btnradio" value="Good" id="btnradio1" autocomplete="off" >
+                                    <label class="btn btn-outline-success" for="btnradio1">Good</label>
+                                <?php
+                                    }
+                                ?>
+                                
                                 
                             </div>
-                            
+                            <input type="hidden" name="completion_status" value="<?php echo $completion_status ?>">
                             <button style="margin-top:100px" type="submit" name="approve_task" id="approve_task" class="btn custombtn report_btn">Approve this report</button>
                         </form>
                     </div>    
@@ -110,8 +135,7 @@
                 <div class="col-6">
                     <center><h2>Reject</h2></center>
                     <div class="task_response">
-                        <form action="/webfinal/reject_task_submit.php/<?php echo $report_id?>" method="post">
-                            <input type="hidden" name="task_id" id="task_id" value="<?php echo $cutstr ?>">
+                        <form enctype="multipart/form-data" action="/webfinal/reject_task_submit.php/<?php echo $report_id?>" method="post">
                             <div class="form-group">
                                 <label for="comment"><b>Comment</b></label>
                                 <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' name="comment"
@@ -119,9 +143,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="extend_deadline">Extend Deadline:</label>
-                                <input type="datetime-local" id="extend_deadline" name="extend_deadline">
+                                <input value="<?php echo str_replace(" ", "T",$row1["deadline"])?>" type="datetime-local" id="extend_deadline" name="extend_deadline">
                             </div>
-                            
+                            <div class="form-group">
+                                <label for="attachment"><b>Attachment</b></label>
+                                <input type="file" class="form-control" name="attachment" id="attachment" accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.xlsx,.pptx,.ppt,.csv">
+                            </div>
                             <button style="margin-top:25px" type="submit" name="reject_task" id="reject_task" class="btn btn-danger report_btn">Reject this report</button>
                         </form>
                     </div>

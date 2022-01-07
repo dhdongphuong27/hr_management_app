@@ -20,8 +20,9 @@
             <span style="text-transform: capitalize;"><?php echo $_SESSION["position"]?></span> of <?php echo $dep_name?>
         </h6>
     </div>
-    <a href="/webfinal/head_index.php">Personal infomation</a>
-    <a href="/webfinal/head_task_management.php">Task management</a>
-    <a href="/webfinal/leave_management.php">Leave management</a> 
+    <a href="/webfinal/head_index.php">Task management</a>
+    <a href="/webfinal/head_information.php">Personal infomation</a>
+    <a href="/webfinal/worker_leave_management.php">Leave applications</a> 
+    <a href="/webfinal/approver_leave_management.php">Approve leave applications</a>
     <a href="/webfinal/logout.php">Logout</a>
 </div>

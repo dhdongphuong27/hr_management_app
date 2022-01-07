@@ -13,7 +13,8 @@ function responseDetails(report_id){
     $(response).toggle('slow');
 }
 function waitingTaskOnly(){
-    $(".table_row").not(".Waiting").toggle('fast');
+    $(".table_row").not(".table-secondary").toggle('fast');
+    $(".waitFilter").toggleClass('active');
 }
 function toggleEditE(e){
     e.preventDefault();
@@ -24,3 +25,16 @@ function toggleEditE(e){
         textareas[i].readOnly = false;
     }
 }
+function toggleChangePwdForm(){
+    document.querySelector(".password_row").style.display = 'none';
+    document.querySelector(".form_change_password").style.display = 'block';
+}
+function unfinishedTaskOnly(){
+    $(".table_row").not(".table-primary").not(".table-danger").not(".table-info").toggle('fast');
+    $(".waitFilter").toggleClass('active');
+}
+function thisYearOnly(){
+    var year = new Date().getFullYear();
+    $(".table_row").not("." + year).toggle('fast');
+}
+

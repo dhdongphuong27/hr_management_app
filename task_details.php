@@ -54,6 +54,8 @@
                 include 'head_sidebar.php';
             }else if ($_SESSION["position"]==="employee"){
                 include 'employee_sidebar.php';
+            }else{
+                header("location:director_index.php");
             }
         ?>
 
@@ -124,14 +126,20 @@
                     ?>
                         <a href="/webfinal/start_task_submit.php/<?php echo $row["task_id"]; ?>" class="btn btn-success float-right" style="color:white">Start this task</a> 
                     <?php
-                        }else{
+                        }else if ($row["work_progress"]!="Canceled"){
 
                         
                     ?>
                         <a href="/webfinal/reports.php/<?php echo $row["task_id"]; ?>" class="btn btn-success float-right" style="color:white">View reports of this task</a>  
                     <?php
                     }
+                    if ($_SESSION["position"]=="head" && $_SESSION["department_id"]==$department_id && $row["work_progress"]=="New"){
                     ?>
+                        <a href="/webfinal/cancel_task.php/<?php echo $row["task_id"]; ?>" class="btn btn-danger float-left" style="color:white">Cancel this task</a>  
+                    <?php
+                    }
+                    ?>
+                    
                 </div>
             </div>
         </div>
