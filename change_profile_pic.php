@@ -16,7 +16,7 @@
             }
     
         }
-        $conn->query("UPDATE users SET profilepic = $target_file WHERE userid=$userid");
+        $conn->query("UPDATE users SET profilepic = '$target_file' WHERE userid=$userid");
         $_SESSION["profilepic"] = $target_file;
     }
     include 'redirect.php';
