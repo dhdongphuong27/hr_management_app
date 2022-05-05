@@ -1,7 +1,7 @@
 <?php
     session_start();
     if (!isset($_SESSION["user"])){
-        header("location:login.php");
+        header("location:/webfinal/login.php");
     }
     include 'employee_only.php';
 ?>

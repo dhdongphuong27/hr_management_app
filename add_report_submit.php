@@ -2,7 +2,7 @@
     include 'conn.php';
     session_start();
     if (!isset($_SESSION["user"])){
-        header("location:login.php");
+        header("location:/webfinal/login.php");
     }
 
     if ($_SESSION["position"]=="employee"){
@@ -34,7 +34,7 @@
             header("location:reports.php/".$task_id);
         }
     }else{
-        header("location:login.php");
+        header("location:/webfinal/login.php");
     }
     header("location:reports.php/".$task_id);
 

@@ -1,0 +1,81 @@
+Date : 2022-01-08 14:16:03
+Directory : c:\xampp\htdocs\webfinal
+Total : 52 files,  2782 codes, 17 comments, 277 blanks, all 3076 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| PHP        |         49 |      2,550 |         10 |        259 |      2,819 |
+| CSS        |          1 |        192 |          7 |         16 |        215 |
+| JavaScript |          1 |         39 |          0 |          2 |         41 |
+| Markdown   |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                      | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                         |         52 |      2,782 |         17 |        277 |      3,076 |
+| javascripts                                               |          1 |         39 |          0 |          2 |         41 |
+| stylesheets                                               |          1 |        192 |          7 |         16 |        215 |
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                  | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\xampp\htdocs\webfinal\README.md                        | Markdown   |          1 |          0 |          0 |          1 |
+| c:\xampp\htdocs\webfinal\account_management.php           | PHP        |         76 |          0 |          6 |         82 |
+| c:\xampp\htdocs\webfinal\add_department.php               | PHP        |         66 |          0 |          7 |         73 |
+| c:\xampp\htdocs\webfinal\add_department_submit.php        | PHP        |         21 |          0 |          2 |         23 |
+| c:\xampp\htdocs\webfinal\add_employee.php                 | PHP        |         79 |          0 |          7 |         86 |
+| c:\xampp\htdocs\webfinal\add_employee_submit.php          | PHP        |         29 |          0 |          4 |         33 |
+| c:\xampp\htdocs\webfinal\add_leave_application.php        | PHP        |        124 |          1 |         12 |        137 |
+| c:\xampp\htdocs\webfinal\add_leave_application_submit.php | PHP        |         38 |          0 |          4 |         42 |
+| c:\xampp\htdocs\webfinal\add_report.php                   | PHP        |         68 |          0 |          6 |         74 |
+| c:\xampp\htdocs\webfinal\add_report_submit.php            | PHP        |         36 |          0 |          5 |         41 |
+| c:\xampp\htdocs\webfinal\add_task.php                     | PHP        |         89 |          0 |          7 |         96 |
+| c:\xampp\htdocs\webfinal\add_task_submit.php              | PHP        |         37 |          0 |          4 |         41 |
+| c:\xampp\htdocs\webfinal\approve_la_submit.php            | PHP        |         11 |          0 |          4 |         15 |
+| c:\xampp\htdocs\webfinal\approve_task_submit.php          | PHP        |         23 |          0 |          8 |         31 |
+| c:\xampp\htdocs\webfinal\approver_leave_management.php    | PHP        |        102 |          1 |          8 |        111 |
+| c:\xampp\htdocs\webfinal\cancel_task.php                  | PHP        |         11 |          0 |          4 |         15 |
+| c:\xampp\htdocs\webfinal\change_password.php              | PHP        |         24 |          0 |          2 |         26 |
+| c:\xampp\htdocs\webfinal\change_profile_pic.php           | PHP        |         22 |          0 |          2 |         24 |
+| c:\xampp\htdocs\webfinal\conn.php                         | PHP        |         11 |          2 |          2 |         15 |
+| c:\xampp\htdocs\webfinal\department_details.php           | PHP        |         84 |          0 |         11 |         95 |
+| c:\xampp\htdocs\webfinal\department_management.php        | PHP        |         89 |          1 |          6 |         96 |
+| c:\xampp\htdocs\webfinal\director_index.php               | PHP        |         68 |          0 |          7 |         75 |
+| c:\xampp\htdocs\webfinal\director_only.php                | PHP        |         12 |          0 |          0 |         12 |
+| c:\xampp\htdocs\webfinal\director_sidebar.php             | PHP        |         20 |          0 |          1 |         21 |
+| c:\xampp\htdocs\webfinal\edit_department_submit.php       | PHP        |         36 |          0 |          1 |         37 |
+| c:\xampp\htdocs\webfinal\employee_details.php             | PHP        |         87 |          0 |         12 |         99 |
+| c:\xampp\htdocs\webfinal\employee_index.php               | PHP        |         91 |          0 |          6 |         97 |
+| c:\xampp\htdocs\webfinal\employee_information.php         | PHP        |         42 |          0 |          6 |         48 |
+| c:\xampp\htdocs\webfinal\employee_only.php                | PHP        |         12 |          0 |          0 |         12 |
+| c:\xampp\htdocs\webfinal\employee_sidebar.php             | PHP        |         26 |          0 |          1 |         27 |
+| c:\xampp\htdocs\webfinal\head_index.php                   | PHP        |        103 |          1 |          8 |        112 |
+| c:\xampp\htdocs\webfinal\head_information.php             | PHP        |         42 |          0 |          6 |         48 |
+| c:\xampp\htdocs\webfinal\head_only.php                    | PHP        |         12 |          0 |          0 |         12 |
+| c:\xampp\htdocs\webfinal\head_sidebar.php                 | PHP        |         27 |          0 |          1 |         28 |
+| c:\xampp\htdocs\webfinal\javascripts\main.js              | JavaScript |         39 |          0 |          2 |         41 |
+| c:\xampp\htdocs\webfinal\leave_application_details.php    | PHP        |        108 |          0 |         11 |        119 |
+| c:\xampp\htdocs\webfinal\login.php                        | PHP        |         48 |          0 |          6 |         54 |
+| c:\xampp\htdocs\webfinal\login_submit.php                 | PHP        |         29 |          3 |          5 |         37 |
+| c:\xampp\htdocs\webfinal\logout.php                       | PHP        |          4 |          0 |          1 |          5 |
+| c:\xampp\htdocs\webfinal\personal_information.php         | PHP        |         70 |          0 |          3 |         73 |
+| c:\xampp\htdocs\webfinal\redirect.php                     | PHP        |         14 |          0 |          0 |         14 |
+| c:\xampp\htdocs\webfinal\reject_la_submit.php             | PHP        |         11 |          0 |          4 |         15 |
+| c:\xampp\htdocs\webfinal\reject_task_submit.php           | PHP        |         35 |          0 |          7 |         42 |
+| c:\xampp\htdocs\webfinal\report_details.php               | PHP        |        151 |          1 |         17 |        169 |
+| c:\xampp\htdocs\webfinal\reports.php                      | PHP        |        136 |          0 |         11 |        147 |
+| c:\xampp\htdocs\webfinal\reset_password.php               | PHP        |         10 |          0 |          1 |         11 |
+| c:\xampp\htdocs\webfinal\set_password.php                 | PHP        |         41 |          0 |          6 |         47 |
+| c:\xampp\htdocs\webfinal\set_password_submit.php          | PHP        |         12 |          0 |          1 |         13 |
+| c:\xampp\htdocs\webfinal\start_task_submit.php            | PHP        |         11 |          0 |          4 |         15 |
+| c:\xampp\htdocs\webfinal\stylesheets\style.css            | CSS        |        192 |          7 |         16 |        215 |
+| c:\xampp\htdocs\webfinal\task_details.php                 | PHP        |        138 |          0 |         15 |        153 |
+| c:\xampp\htdocs\webfinal\worker_leave_management.php      | PHP        |        114 |          0 |          7 |        121 |
+| Total                                                     |            |      2,782 |         17 |        277 |      3,076 |
++-----------------------------------------------------------+------------+------------+------------+------------+------------+

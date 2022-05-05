@@ -2,7 +2,7 @@
     include 'conn.php';
     session_start();
     if (!isset($_SESSION["user"])){
-        header("location:login.php");
+        header("location:/webfinal/login.php");
     }
     if ($_SESSION["position"]=="director"){
         if (isset($_POST["save_department"]) && $_POST["department_name"]!='' && $_POST["room_id"]!='' && $_POST["department_description"]!=''){
@@ -30,7 +30,7 @@
             header("location: department_management.php");
         }
     }else{
-        header("location:login.php");
+        header("location:/webfinal/login.php");
     }
     header("location: department_management.php");
 

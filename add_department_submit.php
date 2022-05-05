@@ -2,7 +2,7 @@
     include 'conn.php';
     session_start();
     if (!isset($_SESSION["user"])){
-        header("location:login.php");
+        header("location:/webfinal/login.php");
     }
 
     if ($_SESSION["position"]=="director"){
@@ -16,7 +16,7 @@
             header("location: add_department.php");
         }
     }else{
-        header("location:login.php");
+        header("location:/webfinal/login.php");
     }
     header("location: department_management.php");
 

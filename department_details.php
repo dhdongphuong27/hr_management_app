@@ -1,7 +1,7 @@
 <?php
     session_start();
     if (!isset($_SESSION["user"])){
-        header("location:login.php");
+        header("location:/webfinal/login.php");
     }
     include 'director_only.php';
 ?>
@@ -79,8 +79,12 @@
                         <hr>
                         
                         <button type="submit" name="save_department" class="btn btn-primary saveBtn">Save</button>
+                    </form>
+                    <form method="post" action="/webfinal/delete_department.php">
+                        <input type="hidden" name="department_id" value="<?php echo $department_id; ?>">
+                        <button type="submit" name="delete_department"  class="btn btn-danger deleteBtn">Delete</button>
                     </form>   
-                    <button class="btn btn-danger deleteBtn">Delete</button>     
+                           
                     <button onclick="toggleEdit(event)" class="btn btn-success editBtn">Edit</button>   
                 </div>
             </div>
